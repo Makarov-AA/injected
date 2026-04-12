@@ -13,7 +13,7 @@ namespace InjectedWorker
         public static int Start(string arg)
         {
             int pid = Process.GetCurrentProcess().Id;
-            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(String.Format("pywinauto_{0}", pid), PipeDirection.InOut, 1, PipeTransmissionMode.Message))
+            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(String.Format("process_{0}", pid), PipeDirection.InOut, 1, PipeTransmissionMode.Message))
             {
                 bool stop = false;
                 while (!stop)
