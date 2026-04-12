@@ -77,14 +77,13 @@ class ConnectionManager(object, metaclass=Singleton):
         reply = json.loads(reply)
 
         reply_code = reply['status_code']
-        reply_message = reply['message']
 
         if reply_code == UNSUPPORTED_ACTION:
-            raise InjectedUnsupportedActionError(reply_message)
+            raise InjectedUnsupportedActionError(reply['message'])
         elif reply_code == RUNTIME_ERROR:
-            raise InjectedRuntimeError(reply_message)
+            raise InjectedRuntimeError(reply['message'])
         elif reply_code == NOT_FOUND:
-            raise InjectedNotFoundError(reply_message)
+            raise InjectedNotFoundError(reply['message'])
         elif reply_code != OK:
             raise InjectedBaseError()
 
