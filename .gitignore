@@ -56,3 +56,6 @@ dkms.conf
 
 # editable package data
 *.egg-info*
+
+# distribution
+dist/

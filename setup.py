@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import sys
 from setuptools import setup, find_packages
+from setuptools.dist import Distribution
 
 
 x86_cmake_arch_name, x64_cmake_arch_name = 'Win32', 'x64'
@@ -18,7 +19,7 @@ else:
 
 build_dirname = 'build_'
 build_dll_dirs = ['./backends/dotnet/', './backends/hook/', './backends/qt/']
-package_dll_dirs = ['./src/injectdll/libs/dotnet/', './src/injectdll/libs/hook/', './src/injectdll/libs/qt/']
+package_dll_dirs = ['./src/injectlib/libs/dotnet/', './src/injectlib/libs/hook/', './src/injectlib/libs/qt/']
 cmake_dirs = build_dll_dirs
 
 # cmake build for DLLs
@@ -61,7 +62,7 @@ It allows to inject DLls into applications for the Microsoft Windows.
 """,
       platforms=['win32'],
 
-      packages=["injectdll"],
+      packages=["injectlib"],
       package_dir={"": "src"},
       include_package_data=True,
 
