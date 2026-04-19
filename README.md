@@ -1,6 +1,6 @@
-# injected
+# injectlib
 
-injected is a Python package that allows you to inject DLLs into running
+injectlib is a Python package that allows you to inject DLLs into running
 processes on Windows (32 or 64-bit).
 
 This can be useful for various tasks, such as debugging or adding
@@ -19,10 +19,10 @@ It contains:
 Python process (client),
 * managed DLL which is able to get text properties of WPF applications,
 * DLL which is able to get text properties of Qt applications,
-* Python code to initiate the injection process,
+* Python code to initiate the injection,
 * and client Python code for data exchange with an injected DLL.
 
-Link to PyPi: <https://pypi.org/project/injected/>
+Link to PyPi: <https://pypi.org/project/injectlib/>
 
 ## How to use
 
@@ -30,8 +30,8 @@ Link to PyPi: <https://pypi.org/project/injected/>
 
 ## Development
 
- 1. Clone repository: <https://github.com/pywinauto/injected.git>
- 2. Create new features or improve exiting (for the injected package)
+ 1. Clone repository: <https://github.com/pywinauto/injectlib.git>
+ 2. Create new features or improve exiting (for the injectlib package)
  3. After work run setup.py from project root to check standalone
 
         python.exe setup.py bdist_wheel

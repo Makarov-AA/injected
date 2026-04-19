@@ -1,14 +1,14 @@
-include injected/libs/dotnet/x86/bootstrap.dll
-include injected/libs/dotnet/x86/Newtonsoft.Json.dll
-include injected/libs/dotnet/x86/worker_wpf.dll
+include injectlib/libs/dotnet/x86/bootstrap.dll
+include injectlib/libs/dotnet/x86/Newtonsoft.Json.dll
+include injectlib/libs/dotnet/x86/worker_wpf.dll
 
-include injected/libs/dotnet/x64/bootstrap.dll
-include injected/libs/dotnet/x64/Newtonsoft.Json.dll
-include injected/libs/dotnet/x64/worker_wpf.dll
+include injectlib/libs/dotnet/x64/bootstrap.dll
+include injectlib/libs/dotnet/x64/Newtonsoft.Json.dll
+include injectlib/libs/dotnet/x64/worker_wpf.dll
 
 
-include injected/libs/hook/x86/pywinmsg32.dll
-include injected/libs/hook/x86/pywinmsg32u.dll
+include injectlib/libs/hook/x86/pywinmsg32.dll
+include injectlib/libs/hook/x86/pywinmsg32u.dll
 
-include injected/libs/hook/x64/pywinmsg64.dll
-include injected/libs/hook/x64/pywinmsg64u.dll
+include injectlib/libs/hook/x64/pywinmsg64.dll
+include injectlib/libs/hook/x64/pywinmsg64u.dll
