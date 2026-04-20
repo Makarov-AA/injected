@@ -4,7 +4,8 @@ import os
 import shutil
 import subprocess
 import sys
-from setuptools import setup, find_packages
+from setuptools import setup
+from setuptools.command.sdist import sdist
 from setuptools.dist import Distribution
 
 
@@ -22,27 +23,32 @@ build_dll_dirs = ['./backends/dotnet/', './backends/hook/', './backends/qt/']
 package_dll_dirs = ['./src/injectlib/libs/dotnet/', './src/injectlib/libs/hook/', './src/injectlib/libs/qt/']
 cmake_dirs = build_dll_dirs
 
-# cmake build for DLLs
-for arch in arch_names_map:
-    for cmake_dir in cmake_dirs:
-        build_dir = cmake_dir + build_dirname + arch
 
-        os.makedirs(build_dir, exist_ok=True)
+class SdistWithDlls(sdist):
+    """Custom build command that compiles DLLs before packaging Python files."""
 
-        subprocess.check_call(['cmake', '-B ' + build_dir, '-S ' + cmake_dir, '-A ' + arch])
-        subprocess.check_call(['cmake', '--build', build_dir, '--config', 'Release'])
+    def run(self):
+        # cmake build for DLLs
+        for arch in arch_names_map:
+            for cmake_dir in cmake_dirs:
+                build_dir = cmake_dir + build_dirname + arch
 
-# copy DLLs to the package
-for arch in arch_names_map:
-    for build_dll_dir, package_dll_dir in zip(build_dll_dirs, package_dll_dirs):
-        for root, _, files in os.walk(build_dll_dir + build_dirname + arch):
-            for file in files:
-                if file.endswith('.dll'):
-                    src_file_path = os.path.join(root, file)
-                    dest_file_path = os.path.join(package_dll_dir + arch_names_map.get(arch), file)
-                    os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
-                    shutil.copy(src_file_path, dest_file_path)
+                os.makedirs(build_dir, exist_ok=True)
 
+                subprocess.check_call(['cmake', '-B ' + build_dir, '-S ' + cmake_dir, '-A ' + arch])
+                subprocess.check_call(['cmake', '--build', build_dir, '--config', 'Release'])
+
+        # copy DLLs to the package
+        for arch in arch_names_map:
+            for build_dll_dir, package_dll_dir in zip(build_dll_dirs, package_dll_dirs):
+                for root, _, files in os.walk(build_dll_dir + build_dirname + arch):
+                    for file in files:
+                        if file.endswith('.dll'):
+                            src_file_path = os.path.join(root, file)
+                            dest_file_path = os.path.join(package_dll_dir + arch_names_map.get(arch), file)
+                            os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
+                            shutil.copy(src_file_path, dest_file_path)
+        super().run()
 
 # mark the package is not pure Python code
 class BinaryDistribution(Distribution):
@@ -85,4 +91,5 @@ It allows to inject DLls into applications for the Microsoft Windows.
       ],
       install_requires=['pywin32'],
       python_requires='>=3.7',
+      cmdclass={'sdist': SdistWithDlls},
       )
