@@ -57,14 +57,28 @@ class BinaryDistribution(Distribution):
 
 
 setup(name='injectlib',
-      version='0.0.1',
+      version='0.0.2',
       description='A set of Python modules to inject DLLs into applications for the Microsoft Windows',
       keywords="windows gui .net inject testing test desktop dll wpf qt",
       url="https://github.com/pywinauto/injectlib",
-      author='Vasily Ryabov, Ilya Naumov, Boris Galochkin, Alexander Makarov',
-      author_email='vasily.v.ryabov@gmail.com',
+      project_urls={
+          "GitHub": "https://github.com/pywinauto/injectlib",
+      },
+      author='Vasily Ryabov, Ilya Naumov, Boris Galochkin, Alexander Makarov and contributors',
+      author_email='pywinauto-users@lists.sourceforge.net',
       long_description="""
-It allows to inject DLls into applications for the Microsoft Windows.
+injectlib is a Python package that allows you to inject DLLs into running
+processes on Windows (32 or 64-bit).
+
+This can be useful for various tasks, such as debugging or adding
+functionality to existing applications.
+
+This is initially created for desktop GUI automation purpose
+(project [pywinauto](https://github.com/pywinauto/pywinauto)), because
+an injected DLL can access GUI widgets' text properties with much better
+precision and coverage than standard OS APIs like MS UI Automation API or
+Win32 API. Other use cases are potentially possible at
+your own risk according to the law and the project license.
 """,
       platforms=['win32'],
 
@@ -72,7 +86,7 @@ It allows to inject DLls into applications for the Microsoft Windows.
       package_dir={"": "src"},
       include_package_data=True,
 
-      license="BSD 3-clause",
+      license="BSD-3-Clause",
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',
@@ -80,11 +94,14 @@ It allows to inject DLls into applications for the Microsoft Windows.
           'License :: OSI Approved :: BSD License',
           'Operating System :: Microsoft :: Windows',
           'Programming Language :: Python',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3 :: Only',
           'Programming Language :: Python :: 3.7',
           'Programming Language :: Python :: 3.8',
           'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: 3.10',
           'Programming Language :: Python :: 3.11',
+          'Programming Language :: Python :: 3.12',
           'Programming Language :: Python :: Implementation :: CPython',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: Software Development :: Testing',
