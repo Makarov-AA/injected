@@ -19,8 +19,9 @@ else:
     arch_names_map = { x86_cmake_arch_name: x86_package_arch_name }
 
 build_dirname = 'build_'
-build_dll_dirs = ['./backends/dotnet/', './backends/hook/', './backends/qt5/']
-package_dll_dirs = ['./src/injectlib/libs/dotnet/', './src/injectlib/libs/hook/', './src/injectlib/libs/qt/']
+build_dll_dirs = ['./backends/dotnet/', './backends/hook/', './backends/qt5/', './backends/qt6/']
+package_dll_dirs = ['./src/injectlib/libs/dotnet/', './src/injectlib/libs/hook/',
+                    './src/injectlib/libs/qt5/', './src/injectlib/libs/qt6/']
 cmake_dirs = build_dll_dirs
 
 
@@ -80,11 +81,21 @@ precision and coverage than standard OS APIs like MS UI Automation API or
 Win32 API. Other use cases are potentially possible at
 your own risk according to the law and the project license.
 """,
-      platforms=['win32'],
+      platforms=['win32', 'linux'],
 
       packages=["injectlib"],
       package_dir={"": "src"},
       include_package_data=True,
+      package_data={
+          "injectlib": [
+              "libs/qt5/x64/*",
+              "libs/qt6/x64/*",
+              "libs/dotnet/x64/*",
+              "libs/dotnet/x86/*",
+              "libs/hook/x64/*",
+              "libs/hook/x86/*",
+          ],
+      },
 
       license="BSD-3-Clause",
       classifiers=[
@@ -106,7 +117,7 @@ your own risk according to the law and the project license.
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: Software Development :: Testing',
       ],
-      install_requires=['pywin32'],
+      install_requires=['pywin32; platform_system=="Windows"'],
       python_requires='>=3.7',
       cmdclass={'sdist': SdistWithDlls},
       )

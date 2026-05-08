@@ -11,8 +11,15 @@ find_package(Qt5 COMPONENTS
     Widgets 
 REQUIRED)
 
+set(QT5_SRV_PLATFORM_SOURCES)
+if(WIN32)
+    list(APPEND QT5_SRV_PLATFORM_SOURCES dllmain.cpp)
+else()
+    list(APPEND QT5_SRV_PLATFORM_SOURCES linux_entry.cpp)
+endif()
+
 add_library(qt5_srv SHARED
-    dllmain.cpp
+    ${QT5_SRV_PLATFORM_SOURCES}
     pipe_server.h
     pipe_server.cpp
     qt_discovery_actions.h
